@@ -31,8 +31,8 @@ export default function Card({
         hover
           ? {
               y: -4,
-              boxShadow: "0 18px 50px rgba(0,0,0,0.07)",
-              transition: { duration: 0.3, ease: "easeOut" },
+              boxShadow: "0 20px 55px rgba(0,0,0,0.06)",
+              transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
             }
           : undefined
       }

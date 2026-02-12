@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif_SC } from "next/font/google";
 import Navigation from "@/components/layout/Navigation";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { siteConfig } from "@content/site.config";
 import "./globals.css";
 
@@ -12,7 +13,7 @@ const inter = Inter({
 
 const notoSerifSC = Noto_Serif_SC({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "700"],
   variable: "--font-noto-serif",
   display: "swap",
 });
@@ -30,8 +31,10 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className={`${inter.variable} ${notoSerifSC.variable}`}>
       <body className="bg-bg text-text antialiased">
-        <Navigation />
-        <main>{children}</main>
+        <SmoothScrollProvider>
+          <Navigation />
+          <main>{children}</main>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

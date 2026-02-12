@@ -1,26 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { musicItems, musicTitle, musicSubtitle } from "@content/music";
+import { getShimmerPlaceholder } from "@/lib/image";
 import type { MusicItem } from "@/lib/types";
 
 /**
- * 音乐模块 — 杂志专栏卡片风格
+ * 音乐模块 — v3 旋律与空间
  *
- * 呈现为像杂志专栏卡片：
- * - 大标题 + 少量说明
- * - 简洁播放/链接按钮
- * - 错位排列，非对齐网格
+ * - 分层进入: 标题 → 描述 → 卡片 stagger
+ * - hover: SpotlightCard 鼠标追踪光影 + 上浮
+ * - 进入带 blur 景深
  */
 export default function MusicSection() {
   return (
     <SectionWrapper id="music">
-      <ScrollReveal>
+      {/* 分层 1: 副标题 */}
+      <ScrollReveal delay={0} distance={30} duration={1.2}>
         <p className="text-sm tracking-widest text-sage-dark uppercase">
           {musicSubtitle}
         </p>
+      </ScrollReveal>
+
+      {/* 分层 2: 主标题 */}
+      <ScrollReveal delay={0.15} distance={35} duration={1.3}>
         <h2 className="font-[family-name:var(--font-noto-serif)] mt-2 text-3xl font-semibold md:text-4xl">
           {musicTitle}
         </h2>
@@ -41,30 +47,30 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
   const offsetClass = index % 2 === 1 ? "md:mt-10" : "";
 
   return (
-    <ScrollReveal delay={index * 0.12} className={offsetClass}>
-      <motion.div
-        className="group overflow-hidden rounded-[var(--radius-card)] bg-card border border-card-border shadow-[var(--shadow-card)]"
-        whileHover={{
-          y: -4,
-          boxShadow: "0 18px 50px rgba(0,0,0,0.07)",
-        }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-      >
-        {/* 封面图 */}
+    <ScrollReveal
+      delay={0.3 + index * 0.2}
+      distance={40}
+      duration={1.3}
+      className={offsetClass}
+    >
+      <SpotlightCard>
+        {/* 封面图 — 不做 scale 动画 */}
         {item.coverSrc && (
-          <div className="aspect-square overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="relative aspect-square overflow-hidden">
+            <Image
               src={item.coverSrc}
               alt={`${item.title} - ${item.artist}`}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              placeholder="blur"
+              blurDataURL={getShimmerPlaceholder(600, 600)}
+              className="object-cover"
             />
           </div>
         )}
 
         {/* 文字信息 */}
-        <div className="p-6">
+        <div className="relative z-20 p-6">
           <h3 className="font-[family-name:var(--font-noto-serif)] text-lg font-semibold">
             {item.title}
           </h3>
@@ -75,7 +81,7 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
             </p>
           )}
 
-          {/* 链接按钮 — 简洁风格 */}
+          {/* 链接按钮 */}
           {item.link && (
             <a
               href={item.link}
@@ -89,7 +95,7 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
                 height="14"
                 viewBox="0 0 14 14"
                 fill="none"
-                className="transition-transform group-hover:translate-x-0.5"
+                className="transition-transform duration-500 group-hover:translate-x-0.5"
               >
                 <path
                   d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
@@ -102,7 +108,7 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
             </a>
           )}
         </div>
-      </motion.div>
+      </SpotlightCard>
     </ScrollReveal>
   );
 }

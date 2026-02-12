@@ -4,7 +4,9 @@ const nextConfig = {
   // 部署时取消下面一行的注释以生成静态文件：
   // output: 'export',
   images: {
-    unoptimized: true,
+    // 部署为静态导出时取消下行注释：
+    // unoptimized: true,
+    formats: ["image/avif", "image/webp"],
   },
 };
 

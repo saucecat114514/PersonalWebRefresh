@@ -1,0 +1,262 @@
+---
+alwaysApply: false
+---
+
+# 🌿 Slow Moments Motion System v1.0
+
+## 目标
+
+为当前个人网站建立统一、克制、舒适的动画体系。  
+风格关键词：
+
+- 慢
+- 呼吸感（但不刻意）
+- 柔和
+- 分层进入
+- 不炫技
+- 不跳跃
+
+⚠️ 本网站是摄影主导，不允许过度动画或明显 scale 效果。
+
+---
+
+# 一、全站动画原则
+
+## 1. 动画只允许使用：
+
+- opacity
+- transform (translate / scale 微量)
+- filter（极轻微）
+
+禁止：
+
+- 弹性 spring
+- 夸张 bounce
+- 旋转
+- 复杂 3D
+- 高频动画
+
+---
+
+## 2. 统一缓动曲线
+
+全站使用：
+
+cubic-bezier(0.22, 1, 0.36, 1)
+
+或 Framer Motion 内置：
+
+ease: "easeOut"
+
+---
+
+## 3. 统一时间节奏
+
+| 类型 | Duration |
+|------|----------|
+| 页面切换 | 0.6s |
+| Section 进入 | 0.9s |
+| 标题进入 | 1.0~1.2s |
+| hover 动画 | 0.4~0.5s |
+| stagger 间隔 | 0.1~0.15s |
+
+---
+
+# 二、页面切换动画（必须实现）
+
+实现全站 Page Transition。
+
+效果：
+
+Exit：
+- opacity 1 → 0
+- translateY 0 → -10px
+
+Enter：
+- opacity 0 → 1
+- translateY 20px → 0
+
+Duration: 0.6s
+
+视觉目标：
+让页面像“轻轻翻页”，而不是突然切换。
+
+---
+
+# 三、Hero 首屏
+
+⚠️ 不要背景呼吸动画。
+
+只做：
+
+### 1. 标题进入
+
+主标题：
+
+- opacity: 0 → 1
+- translateY: 30px → 0
+- duration: 1.2s
+
+副标题：
+
+- 延迟 0.3s
+- duration: 0.8s
+- opacity + translateY
+
+### 2. Scroll 指示
+
+- translateY 0 → 8px → 0
+- duration: 2.5s
+- infinite
+- 非常轻微
+
+---
+
+# 四、Section Reveal 动画（全站统一）
+
+每个 section 进入视口时：
+
+- opacity: 0 → 1
+- translateY: 60px → 0
+- duration: 0.9s
+
+只触发一次。
+
+不要重复触发。
+
+---
+
+# 五、摄影网格（光与影）
+
+这是视觉核心区域。
+
+### 进入动画
+
+- 整体 section 先 fadeUp
+- 卡片 stagger 0.15s
+
+### hover 动画
+
+- scale 1 → 1.03
+- filter brightness 1 → 1.05
+- duration 0.5s
+- 不加重阴影
+
+禁止：
+
+- scale 超过 1.04
+- 弹跳
+- 明显位移
+
+---
+
+# 六、音乐模块（旋律与空间）
+
+风格比摄影更柔。
+
+进入：
+
+- opacity + translateY 40px
+- duration 0.9s
+
+hover：
+
+- translateY -6px
+- shadow 轻微增强
+- duration 0.4s
+
+不要 scale 图片。
+
+---
+
+# 七、游戏模块（沉浸之旅）
+
+节奏略微快一点。
+
+进入：
+
+- opacity + translateY 40px
+- duration 0.7s
+
+hover：
+
+- scale 1 → 1.02
+- duration 0.4s
+
+不要科技感特效。
+
+---
+
+# 八、足迹模块（时间线卡片）
+
+卡片依次进入：
+
+- opacity 0 → 1
+- translateX -20px → 0
+- stagger 0.1s
+
+保持简洁。
+
+---
+
+# 九、找到我（结尾区域）
+
+只做：
+
+- opacity 0 → 1
+- duration 1.2s
+
+不做位移。
+
+要“自然落地”。
+
+---
+
+# 十、导航栏行为
+
+实现：
+
+Hero 区透明  
+滚动超过 80px 后变米白背景
+
+transition: 0.5s
+
+不能突然变化。
+
+---
+
+# 十一、性能要求
+
+必须：
+
+- 使用 transform 而非 top/left
+- 不监听全局 scroll
+- 使用 IntersectionObserver 或 whileInView
+
+---
+
+# 十二、动画的目标效果
+
+用户应该：
+
+- 感觉页面“流动”
+- 感觉有层次
+- 不觉得有动画
+- 不被干扰
+
+动画必须是“空气”，不是“主角”。
+
+---
+
+# 最终要求
+
+在现有布局基础上：
+
+- 不改变排版结构
+- 不改变配色
+- 不增加视觉元素
+- 只增强动画系统
+
+目标是：
+
+让网站从“静态展示”升级为“有呼吸感的空间”。

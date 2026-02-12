@@ -39,9 +39,7 @@
 }
 
 /* === 全局基础样式 === */
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior 由 Lenis 平滑滚动库接管 */
 
 body {
   background-color: var(--color-bg);
@@ -68,6 +66,40 @@ body {
 ::selection {
   background-color: var(--color-sage-light);
   color: var(--color-text);
+}
+
+/*
+ * ── 摄影 Editorial Mosaic 拼贴布局 ──
+ *
+ * 桌面端: 12 列 × N 行不规则拼贴网格
+ * 核心 5 区域：hero (左上主视觉) + 2 portrait (右侧纵列) + 2 landscape (底部)
+ * 各区域边界刻意错开，产生不规则拼贴感
+ *
+ * 布局示意 (12列 × 5行):
+ * ┌────────────────────────┬────────────┐
+ * │                        │ portrait-1 │ row 1-2
+ * │   H E R O  (8 col)    ├────────────┤ ← 右列在 row3 断开
+ * │                        │            │ row 3
+ * ├──────────────┬─────────┤ portrait-2 │ ← 左侧在 row4 断开
+ * │ landscape-1  │ land-2  │            │ row 4-5
+ * └──────────────┴─────────┴────────────┘
+ */
+@media (min-width: 768px) {
+  .mosaic-grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 110px;
+  }
+  .mosaic-hero            { grid-area: 1 / 1 / 4 / 9; }
+  .mosaic-portrait-top    { grid-area: 1 / 9 / 3 / 13; }
+  .mosaic-portrait-bottom { grid-area: 3 / 9 / 6 / 13; }
+  .mosaic-landscape-left  { grid-area: 4 / 1 / 6 / 6; }
+  .mosaic-landscape-right { grid-area: 4 / 6 / 6 / 9; }
+
+  /* 扩展行：不同列宽交替，避免等宽 */
+  .mosaic-ext-w5  { grid-column: span 5; }
+  .mosaic-ext-w4  { grid-column: span 4; }
+  .mosaic-ext-w3  { grid-column: span 3; }
+  .mosaic-ext-row { grid-row: span 2; }
 }
 
 /* === 滚动条美化 === */

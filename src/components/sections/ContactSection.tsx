@@ -10,13 +10,18 @@ import {
 } from "@content/contact";
 
 /**
- * 联系方式区块
- * 简约风格 — 清晰的链接列表 + 友情链接
+ * 联系方式区块 — v2 结尾
+ *
+ * v2 动画规范（找到我）：
+ * - 只做 opacity 0→1, 无位移, 无 scale
+ * - duration 1.8s（放慢节奏）
+ * - 无 blur（自然落地，不需要景深效果）
+ * - 效果：自然落地
  */
 export default function ContactSection() {
   return (
     <SectionWrapper id="contact" muted>
-      <ScrollReveal>
+      <ScrollReveal direction="none" duration={1.8} distance={0} blur={false}>
         <div className="mx-auto max-w-lg text-center">
           <p className="text-sm tracking-widest text-sage-dark uppercase">
             {contactSubtitle}
@@ -55,26 +60,37 @@ export default function ContactSection() {
               <p className="text-xs tracking-wider text-text-muted uppercase">
                 友情链接
               </p>
-              <div className="mt-5 flex flex-wrap justify-center gap-4">
+              <div className="mt-6 flex flex-wrap justify-center gap-5">
                 {friendLinks.map((link) => (
                   <a
                     key={link.url}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link inline-flex items-center gap-1.5 rounded-full border border-card-border bg-card px-4 py-2 text-sm text-text-muted shadow-[var(--shadow-card)] transition-all hover:border-sage-light hover:text-sage-dark hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]"
+                    className="group/link flex flex-col items-center gap-2 rounded-[var(--radius-card)] border border-card-border bg-card px-8 py-5 shadow-[var(--shadow-card)] transition-all duration-500 hover:border-sage-light hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
                     title={link.description}
                   >
-                    {link.name}
+                    {/* 头像占位符 */}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-light/30 text-sm font-semibold text-sage-dark">
+                      {link.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-base font-medium text-text transition-colors group-hover/link:text-sage-dark">
+                      {link.name}
+                    </span>
+                    {link.description && (
+                      <span className="text-xs text-text-muted">
+                        {link.description}
+                      </span>
+                    )}
                     <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
                       fill="none"
-                      className="opacity-0 transition-opacity group-hover/link:opacity-100"
+                      className="mt-1 text-text-muted/40 transition-all duration-400 group-hover/link:text-sage-dark group-hover/link:translate-x-0.5"
                     >
                       <path
-                        d="M3.5 8.5L8.5 3.5M8.5 3.5H5M8.5 3.5V7"
+                        d="M4 10L10 4M10 4H5.5M10 4V8.5"
                         stroke="currentColor"
                         strokeWidth="1.2"
                         strokeLinecap="round"

@@ -18,13 +18,7 @@ export const contactItems: ContactInfo[] = [
     label: "GitHub",
     value: "github.com/saucecat114514",
     href: "https://github.com/saucecat114514",
-  },
-  {
-    label: "微信",
-    value: "@C1972372765",
-    href: "",
-  },
-];
+  }];
 
 /**
  * 友情链接列表
@@ -34,7 +28,7 @@ export const friendLinks: FriendLink[] = [
   {
     name: "Jona",
     url: "https://www.infinite.moe/",
-    description: "一个很棒的个人网站",
+    description: "一个很棒的网站",
   },
   // 添加更多友情链接：
   // { name: "名称", url: "https://...", description: "简短描述（可选）" },
