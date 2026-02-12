@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * Warm Organic Bento — Design Token System
+ * 严格遵循设计文档色板，禁止使用高饱和色、纯黑、纯白、亮蓝、亮绿
+ */
+
+@theme {
+  /* === 页面背景 === */
+  --color-bg: #F6F5F1;
+  --color-bg-muted: #ECEAE4;
+
+  /* === 模块卡片 === */
+  --color-card: #FFFFFF;
+  --color-card-border: #E6E3DC;
+
+  /* === 自然强调色 Sage Warm === */
+  --color-sage: #A8B6A1;
+  --color-sage-dark: #8FA195;
+  --color-sage-light: #CBD4C6;
+
+  /* === 文字 === */
+  --color-text: #2F2E2B;
+  --color-text-muted: #7B7A74;
+
+  /* === 柔光阴影 === */
+  --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 18px 50px rgba(0, 0, 0, 0.07);
+
+  /* === 圆角 === */
+  --radius-card: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 20px;
+
+  /* === 字体 === */
+  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Georgia", ui-serif, serif;
+}
+
+/* === 全局基础样式 === */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Typography prose 定制（用于 MDX 内容） === */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-links: var(--color-sage-dark);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-sage);
+  --tw-prose-hr: var(--color-card-border);
+  --tw-prose-quotes: var(--color-text-muted);
+  --tw-prose-quote-borders: var(--color-sage-light);
+}
+
+/* === 选择文本颜色 === */
+::selection {
+  background-color: var(--color-sage-light);
+  color: var(--color-text);
+}
+
+/* === 滚动条美化 === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage-light);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage);
+}

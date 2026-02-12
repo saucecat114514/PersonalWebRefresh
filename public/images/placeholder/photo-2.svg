@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#ECEAE4"/>
+  <rect x="80" y="100" width="640" height="800" rx="16" fill="#F6F5F1" stroke="#E6E3DC" stroke-width="1"/>
+  <circle cx="400" cy="480" r="30" fill="none" stroke="#A8B6A1" stroke-width="2"/>
+  <text x="400" y="530" text-anchor="middle" fill="#7B7A74" font-family="sans-serif" font-size="18">摄影 02</text>
+</svg>
