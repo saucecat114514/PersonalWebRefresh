@@ -26,6 +26,9 @@ export const projectItems: ProjectItem[] = [
     title: "气味收藏：香气与季节",
     description: "收集并记录不同气味带来的空间感与记忆：从花香到木香，从清新到沉稳，从季节变化到时光流逝。",
     period: "2026",
-    tags: ["香水", "气味", "记忆"],
+    subtitle: "Scent Journal",
+    previewText: "从果园走进壁炉旁的旅程 · 像秋天午后下过雨的窗台",
+    tags: ["香水", "气味", "记忆", "花香", "木质", "皂感"],
+    link: "/notes/scents",
   },
 ];

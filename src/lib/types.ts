@@ -34,6 +34,37 @@ export interface ProjectItem {
   period?: string;
   tags?: string[];
   link?: string;
+  subtitle?: string;
+  previewText?: string;
+}
+
+/** 香水条目数据 */
+export interface ScentEntry {
+  id: string;
+  name: string;
+  brand: string;
+  year: string;
+  concentration: string;
+  family: string[];
+  topNotes: string[];
+  middleNotes: string[];
+  baseNotes: string[];
+  tags: string[];
+  season: string[];
+  scene: string[];
+  mood: string[];
+  /** 1-5 */
+  longevity: number;
+  /** 1-5 */
+  sillage: number;
+  /** 1-5 */
+  liking: number;
+  text: string;
+  shortFeeling: string;
+  sceneMemory?: string;
+  memoryAnchor?: string;
+  imageSrc: string;
+  featured?: boolean;
 }
 
 /** 联系方式 */

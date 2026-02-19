@@ -51,6 +51,8 @@ function ProjectCard({
   item: ProjectItem;
   index: number;
 }) {
+  const isInternal = item.link?.startsWith("/");
+
   return (
     <ScrollReveal
       delay={0.3 + index * 0.15}
@@ -63,8 +65,8 @@ function ProjectCard({
         hoverY={-3}
         as={item.link ? "a" : "div"}
         href={item.link}
-        target={item.link ? "_blank" : undefined}
-        rel={item.link ? "noopener noreferrer" : undefined}
+        target={item.link && !isInternal ? "_blank" : undefined}
+        rel={item.link && !isInternal ? "noopener noreferrer" : undefined}
       >
         <div className="relative z-20 flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-8">
           <div className="flex-1">
@@ -93,6 +95,13 @@ function ProjectCard({
             <p className="mt-2 leading-[1.7] text-text-muted">
               {item.description}
             </p>
+
+            {item.previewText && (
+              <p className="mt-2 font-[family-name:var(--font-noto-serif)] text-sm leading-[1.7] text-text-muted/70 italic">
+                {item.previewText}
+              </p>
+            )}
+
             {item.tags && item.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
@@ -107,11 +116,18 @@ function ProjectCard({
             )}
           </div>
 
-          {item.period && (
-            <span className="shrink-0 text-sm text-text-muted md:mt-1">
-              {item.period}
-            </span>
-          )}
+          <div className="flex shrink-0 flex-col items-end gap-1 md:mt-1">
+            {item.period && (
+              <span className="text-sm text-text-muted">
+                {item.period}
+              </span>
+            )}
+            {item.subtitle && (
+              <span className="text-xs tracking-wider text-text-muted/50">
+                {item.subtitle}
+              </span>
+            )}
+          </div>
         </div>
       </SpotlightCard>
     </ScrollReveal>

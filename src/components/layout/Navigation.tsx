@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { navItems, siteConfig } from "@content/site.config";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const darkText = scrolled || !isHome;
 
   // 滚动进度指示条
   const { scrollYProgress } = useScroll();
@@ -48,7 +52,7 @@ export default function Navigation() {
             className={`
               font-[family-name:var(--font-noto-serif)] text-lg font-semibold
               transition-colors duration-300
-              ${scrolled ? "text-text" : "text-card"}
+              ${darkText ? "text-text" : "text-card"}
             `}
           >
             {siteConfig.name}
@@ -63,7 +67,7 @@ export default function Navigation() {
                   className={`
                     group relative text-sm tracking-wide
                     transition-colors duration-300 hover:text-sage-dark
-                    ${scrolled ? "text-text-muted" : "text-card/80"}
+                    ${darkText ? "text-text-muted" : "text-card/80"}
                   `}
                 >
                   {item.label}
@@ -84,7 +88,7 @@ export default function Navigation() {
               className={`block h-[1.5px] w-5 transition-all duration-300 ${
                 mobileOpen
                   ? "translate-y-[4.5px] rotate-45 bg-text"
-                  : scrolled
+                  : darkText
                     ? "bg-text"
                     : "bg-card"
               }`}
@@ -93,7 +97,7 @@ export default function Navigation() {
               className={`block h-[1.5px] w-5 transition-all duration-300 ${
                 mobileOpen
                   ? "-translate-y-[4.5px] -rotate-45 bg-text"
-                  : scrolled
+                  : darkText
                     ? "bg-text"
                     : "bg-card"
               }`}
