@@ -36,6 +36,12 @@ export interface ProjectItem {
   link?: string;
   subtitle?: string;
   previewText?: string;
+  /** 使用「专题入口卡」布局（章节封面式） */
+  featureEntry?: true;
+  /** 专题入口卡副标题一行，如「季节｜空间｜记忆｜情绪」 */
+  featureTagline?: string;
+  /** 专题入口卡 CTA 文案，如「进入气味世界」 */
+  featureCta?: string;
 }
 
 /** 香水条目数据 */

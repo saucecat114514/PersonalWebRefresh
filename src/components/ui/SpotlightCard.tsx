@@ -7,6 +7,7 @@ import { EASE_CURVE } from "@/components/ui/ScrollReveal";
 interface SpotlightCardProps {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   /** hover 上浮距离 (px)，默认 -5 */
   hoverY?: number;
   as?: "div" | "a";
@@ -22,6 +23,7 @@ interface SpotlightCardProps {
 export default function SpotlightCard({
   children,
   className = "",
+  style,
   hoverY = -5,
   as = "div",
   href,
@@ -53,6 +55,7 @@ export default function SpotlightCard({
         bg-card shadow-[var(--shadow-card)]
         ${className}
       `}
+      style={style}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

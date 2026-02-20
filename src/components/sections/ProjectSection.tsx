@@ -36,11 +36,73 @@ export default function ProjectSection() {
       </ScrollReveal>
 
       <div className="mt-14 space-y-6 md:space-y-8">
-        {projectItems.map((item, index) => (
-          <ProjectCard key={item.title} item={item} index={index} />
-        ))}
+        {projectItems.map((item, index) =>
+          item.featureEntry === true ? (
+            <FeatureEntryCard key={item.title} item={item} index={index} />
+          ) : (
+            <ProjectCard key={item.title} item={item} index={index} />
+          )
+        )}
       </div>
     </SectionWrapper>
+  );
+}
+
+function FeatureEntryCard({
+  item,
+  index,
+}: {
+  item: ProjectItem;
+  index: number;
+}) {
+  const mainTitle =
+    item.subtitle ?
+      `${item.title.split("：")[0]} · ${item.subtitle}`
+    : item.title;
+
+  return (
+    <ScrollReveal
+      delay={0.3 + index * 0.15}
+      direction="left"
+      distance={25}
+      duration={1.2}
+    >
+      <SpotlightCard
+        className="relative overflow-hidden p-8 md:p-10"
+        style={{ background: "var(--gradient-feature-entry)" }}
+        hoverY={-3}
+        as="a"
+        href={item.link}
+      >
+        <div className="relative z-20 flex flex-col gap-6">
+          <div>
+            <h3 className="font-[family-name:var(--font-noto-serif)] text-2xl font-semibold tracking-tight md:text-3xl">
+              {mainTitle}
+            </h3>
+            {item.featureTagline && (
+              <p className="mt-2 text-sm tracking-wide text-text-muted">
+                {item.featureTagline}
+              </p>
+            )}
+          </div>
+
+          {item.previewText && (
+            <p className="font-[family-name:var(--font-noto-serif)] text-base leading-[1.7] text-text-muted/90 italic">
+              {item.previewText}
+            </p>
+          )}
+
+          {item.featureCta && (
+            <span className="inline-flex items-center gap-1.5 border-b border-sage-dark/40 pb-0.5 text-sage-dark transition-colors duration-300 group-hover:border-sage-dark group-hover:text-sage-dark">
+              {item.featureCta}
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                →
+              </span>
+            </span>
+          )}
+        </div>
+      </SpotlightCard>
+    </ScrollReveal>
   );
 }
 

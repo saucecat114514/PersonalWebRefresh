@@ -36,6 +36,9 @@
   /* === 字体 === */
   --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Noto Serif SC", "Georgia", ui-serif, serif;
+
+  /* === 专题入口卡背景（冷暖过渡） === */
+  --gradient-feature-entry: linear-gradient(135deg, #F5F0E8 0%, #E8EDE6 100%);
 }
 
 /* === 全局基础样式 === */
