@@ -81,31 +81,113 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
             </p>
           )}
 
-          {/* 链接按钮 */}
-          {item.link && (
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm text-sage-dark transition-colors hover:text-sage"
+          {/* Action Group：Spotify 主入口 + YouTube 次入口 */}
+          {(item.spotifyUrl ?? item.link || item.youtubeUrl) && (
+            <div
+              role="group"
+              aria-label="聆听入口"
+              className="mt-5 flex flex-wrap items-center gap-3 sm:gap-[10px]"
             >
-              <span>聆听</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                className="transition-transform duration-500 group-hover:translate-x-0.5"
-              >
-                <path
-                  d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+              {(item.spotifyUrl ?? item.link) && (
+                <div className="relative w-full sm:w-auto">
+                  <a
+                    href={item.spotifyUrl ?? item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="在 Spotify 中打开"
+                    className="
+                      group/btn inline-flex h-11 min-h-[40px] w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-card-border
+                      bg-white/90 px-4 shadow-[var(--shadow-card)]
+                      transition-all duration-200 ease-out
+                      hover:-translate-y-0.5 hover:border-sage-light hover:bg-sage-light/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.07)]
+                      active:translate-y-0 active:shadow-[var(--shadow-card)]
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-dark/30 focus-visible:ring-offset-2
+                    "
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      className="shrink-0 text-sage-dark"
+                      aria-hidden
+                    >
+                      <path
+                        d="M4 3.5v7l7-3.5L4 3.5z"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M11 4v6"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span className="text-sm font-medium text-sage-dark">
+                      Spotify 聆听
+                    </span>
+                  </a>
+                  <div
+                    className="
+                      pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2
+                      rounded-md bg-text/90 px-2 py-1 text-xs text-white shadow-sm
+                      opacity-0 transition-opacity duration-200 ease-out
+                      group-hover/btn:opacity-100
+                    "
+                    role="tooltip"
+                  >
+                    在 Spotify 中打开
+                  </div>
+                </div>
+              )}
+              {item.youtubeUrl && (
+                <div className="relative w-full sm:w-auto">
+                  <a
+                    href={item.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="备用入口（无会员墙更友好）"
+                    className="
+                      group/btn inline-flex h-11 min-h-[40px] w-full sm:w-auto items-center justify-center gap-2 rounded-full
+                      border border-transparent bg-sage-light/10 px-4
+                      text-sm text-text-muted
+                      transition-all duration-200 ease-out
+                      hover:border-card-border hover:bg-sage-light/25 hover:text-text-muted
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-dark/30 focus-visible:ring-offset-2
+                    "
+                  >
+                    <span>备用：YouTube</span>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      className="shrink-0 opacity-70"
+                      aria-hidden
+                    >
+                      <path
+                        d="M4.5 2.5H9.5V7.5M2 10L9.5 2.5"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                  <div
+                    className="
+                      pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2
+                      rounded-md bg-text/90 px-2 py-1 text-xs text-white shadow-sm
+                      opacity-0 transition-opacity duration-200 ease-out
+                      group-hover/btn:opacity-100
+                    "
+                    role="tooltip"
+                  >
+                    备用入口（无会员墙更友好）
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </SpotlightCard>

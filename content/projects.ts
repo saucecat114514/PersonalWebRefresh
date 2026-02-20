@@ -34,5 +34,4 @@ export const projectItems: ProjectItem[] = [
     period: "2026",
     tags: ["游戏", "截图", "体验"],
   },
-  
 ];

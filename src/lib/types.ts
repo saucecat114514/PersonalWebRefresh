@@ -16,6 +16,10 @@ export interface MusicItem {
   description?: string;
   coverSrc?: string;
   link?: string;
+  /** 主入口：在 Spotify 中打开 */
+  spotifyUrl?: string;
+  /** 次入口：备用聆听（如 YouTube） */
+  youtubeUrl?: string;
 }
 
 /** 游戏卡片数据 */
