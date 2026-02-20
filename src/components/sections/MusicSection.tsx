@@ -82,7 +82,7 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
           )}
 
           {/* Action Group：Spotify 主入口 + YouTube 次入口 */}
-          {(item.spotifyUrl ?? item.link || item.youtubeUrl) && (
+          {((item.spotifyUrl ?? item.link) || item.youtubeUrl) && (
             <div
               role="group"
               aria-label="聆听入口"
