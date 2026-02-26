@@ -81,8 +81,8 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
             </p>
           )}
 
-          {/* Action Group：Spotify 主入口 + YouTube 次入口 */}
-          {((item.spotifyUrl ?? item.link) || item.youtubeUrl) && (
+          {/* 暂时隐藏 Spotify / YouTube 跳转按钮，恢复时取消下方整块注释 */}
+          {/* {((item.spotifyUrl ?? item.link) || item.youtubeUrl) && (
             <div
               role="group"
               aria-label="聆听入口"
@@ -188,7 +188,7 @@ function MusicCard({ item, index }: { item: MusicItem; index: number }) {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </div>
       </SpotlightCard>
     </ScrollReveal>
