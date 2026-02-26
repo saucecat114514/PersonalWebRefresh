@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import type { ScentEntry } from "@/lib/types";
 
@@ -62,9 +63,6 @@ export default function ScentEntryCard({ entry }: { entry: ScentEntry }) {
   const [notesOpen, setNotesOpen] = useState(false);
   const [textExpanded, setTextExpanded] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
-  const imgRef = useCallback((node: HTMLImageElement | null) => {
-    if (node?.complete && node.naturalWidth > 0) setImgLoaded(true);
-  }, []);
 
   const shouldTruncate = entry.text.length > 80;
 
@@ -209,11 +207,12 @@ export default function ScentEntryCard({ entry }: { entry: ScentEntry }) {
       {/* === 尾部：氛围图 === */}
       <div className="overflow-hidden rounded-b-[var(--radius-card)]">
         <div className="relative aspect-[16/7] w-full overflow-hidden">
-          <img
-            ref={imgRef}
+          <Image
             src={entry.imageSrc}
             alt={`${entry.name} 氛围`}
-            className={`h-full w-full object-cover transition-opacity duration-700 ${
+            fill
+            sizes="(max-width: 768px) 100vw,  min(90vw, 800px)"
+            className={`object-cover transition-opacity duration-700 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
             onLoad={() => setImgLoaded(true)}

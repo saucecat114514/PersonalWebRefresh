@@ -20,6 +20,8 @@ export default function ScentsPage() {
     scene: [],
     family: [],
     mood: [],
+    tags: [],
+    brand: [],
   });
 
   const featuredEntry = scentEntries.find((e) => e.featured);
@@ -46,6 +48,16 @@ export default function ScentsPage() {
         !entry.mood.some((s) => filters.mood.includes(s))
       )
         return false;
+      if (
+        filters.tags.length > 0 &&
+        !entry.tags.some((t) => filters.tags.includes(t))
+      )
+        return false;
+      if (
+        filters.brand.length > 0 &&
+        !filters.brand.includes(entry.brand)
+      )
+        return false;
       return true;
     });
   }, [filters]);
@@ -58,7 +70,9 @@ export default function ScentsPage() {
     filters.season.length > 0 ||
     filters.scene.length > 0 ||
     filters.family.length > 0 ||
-    filters.mood.length > 0;
+    filters.mood.length > 0 ||
+    filters.tags.length > 0 ||
+    filters.brand.length > 0;
 
   return (
     <PageTransition>
@@ -152,6 +166,8 @@ export default function ScentsPage() {
                         scene: [],
                         family: [],
                         mood: [],
+                        tags: [],
+                        brand: [],
                       })
                     }
                     className="mt-3 text-xs text-sage-dark transition-colors hover:text-sage"

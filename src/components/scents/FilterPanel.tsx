@@ -5,11 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { ScentEntry } from "@/lib/types";
 import { SEASONS, SCENES, FAMILIES, MOODS } from "@content/scents";
 
+const RECENT_TAG_OPTIONS = ["最近更新"] as const;
+
 export interface FilterState {
   season: string[];
   scene: string[];
   family: string[];
   mood: string[];
+  tags: string[];
+  brand: string[];
 }
 
 interface FilterPanelProps {
@@ -150,12 +154,15 @@ export default function FilterPanel({
   const seasonalTop3 = getSeasonalTop3(entries, currentSeason);
   const topKeywords = getTopKeywords(entries, 5);
   const recentEntries = [...entries].sort((a, b) => b.year.localeCompare(a.year)).slice(0, 3);
+  const brands = [...new Set(entries.map((e) => e.brand))].sort();
 
   const hasFilters =
     filters.season.length > 0 ||
     filters.scene.length > 0 ||
     filters.family.length > 0 ||
-    filters.mood.length > 0;
+    filters.mood.length > 0 ||
+    filters.tags.length > 0 ||
+    filters.brand.length > 0;
 
   function toggle(key: keyof FilterState, val: string) {
     const arr = filters[key];
@@ -166,14 +173,23 @@ export default function FilterPanel({
   }
 
   function clearAll() {
-    onFilterChange({ season: [], scene: [], family: [], mood: [] });
+    onFilterChange({
+      season: [],
+      scene: [],
+      family: [],
+      mood: [],
+      tags: [],
+      brand: [],
+    });
   }
 
   if (mobile) {
     const allChips = [
+      ...RECENT_TAG_OPTIONS.map((s) => ({ label: s, key: "tags" as const })),
       ...SEASONS.map((s) => ({ label: s, key: "season" as const })),
       ...MOODS.map((s) => ({ label: s, key: "mood" as const })),
       ...FAMILIES.map((s) => ({ label: s, key: "family" as const })),
+      ...brands.map((b) => ({ label: b, key: "brand" as const })),
     ];
 
     return (
@@ -241,6 +257,18 @@ export default function FilterPanel({
         selected={filters.mood}
         onToggle={(v) => toggle("mood", v)}
         defaultOpen={false}
+      />
+      <FilterSection
+        title="最近更新"
+        options={RECENT_TAG_OPTIONS}
+        selected={filters.tags}
+        onToggle={(v) => toggle("tags", v)}
+      />
+      <FilterSection
+        title="品牌"
+        options={brands}
+        selected={filters.brand}
+        onToggle={(v) => toggle("brand", v)}
       />
 
       {/* Mini Stats */}
