@@ -10,6 +10,12 @@ export const siteConfig = {
   description: "一个关于自然摄影、音乐与生活的个人空间",
   /** 站点 URL（部署后替换） */
   url: "https://slowmoments.site",
+  /** ICP 备案号 */
+  icpRecord: "闽ICP备2026005708号",
+  /** 公安备案号（显示文案） */
+  gonganRecord: "闽公网安备35020602003562号",
+  /** 公安备案 recordcode（用于 beian.gov.cn 跳转） */
+  gonganRecordCode: "35020602003562",
 };
 
 /** 导航栏链接 */

@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { siteConfig, socialLinks } from "@content/site.config";
 
 /**
- * 简约底部 — 站点名 + 社交链接
+ * 简约底部 — 站点名 + 社交链接 + 备案信息
  */
 export default function Footer() {
   return (
@@ -27,16 +28,33 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs text-text-muted">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-text-muted">
           <a
             href="http://www.beian.gov.cn/portal/registerSystemInfo"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-sage-dark"
           >
-            闽ICP备2026005708号
+            {siteConfig.icpRecord}
           </a>
-        </p>
+          {siteConfig.gonganRecord && siteConfig.gonganRecordCode && (
+            <a
+              href={`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${siteConfig.gonganRecordCode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-sage-dark"
+            >
+              <Image
+                src="/images/gongicon.webp"
+                alt="公安备案"
+                width={14}
+                height={14}
+                className="shrink-0"
+              />
+              {siteConfig.gonganRecord}
+            </a>
+          )}
+        </div>
       </div>
     </footer>
   );
